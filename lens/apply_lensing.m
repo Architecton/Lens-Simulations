@@ -24,6 +24,8 @@
 % (The intersections should be ordered in the order they occur.)
 % #######################################################################################
 % Authors: Kim Ana Badovinac, Katja Logar, Jernej Vivod
+%
+% IF NOT USED FOR PLOTTING/VISUALIZATION, ONLY THE FIRST RETURN VALUE IS NEEDED!
 function [ray_out, ray_inside, t_in, t_out, intersections] = apply_lensing(ray_in, lens)
 	% Compute intersection of line ray_in with lens (as it enters the lens)
 	% [intersection1, t_in] = TODO
