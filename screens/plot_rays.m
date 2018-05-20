@@ -2,6 +2,7 @@
 %
 % Plots line functions representing the rays. Auxiliary function used for
 % visualization and debugging.
+% Author: Jernej Vivod
 function [] = plot_rays(line_functions)
 	% Set limit for t.	
 	limit = 7;	
