@@ -25,5 +25,24 @@
 % #######################################################################################
 % Authors: Kim Ana Badovinac, Katja Logar, Jernej Vivod
 function [ray_out, ray_inside, t_in, t_out, intersections] = apply_lensing(ray_in, lens)
-	% TODO
+	% Compute intersection of line ray_in with lens (as it enters the lens)
+	% [intersection1, t_in] = TODO
+	
+	% Compute directional vector of new parametrized line representing the ray inside the lens
+	% dir_vector_inside = TODO
+	
+	% Construct function of ray inside lens using the computed directional vectorize
+	% ray_inside = @(t) intersection1 + t*dir_vector_inside;
+	
+	% Compute intersection of ray_inside with the lens
+	% [intersection2, t_out] = TODO
+	
+	% Compute directional vector of new parametrized line representing the ray as it leaves the lens
+	% dir_vector_out = TODO
+	
+	% Construct function of ray as it leaves the lens
+	% ray_out = @(t) intersection2 + t*dir_vector_out;
+	
+	% intersections = [intersection1, intersection2];
+	
 endfunction
