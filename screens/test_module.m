@@ -24,7 +24,7 @@ scaling_factor = input("Enter second screen scaling factor: ");
 
 % Define second screen spanning vectors.
 vf1 = [0; 0; -2];
-vf2 = [2; 2; 0];
+vf2 = [0; 2; 0];
 
 % Compute screen centering values (Used to center screen when scaling is applied).
 delta_scaling1 = ((norm(vf1) * scaling_factor) - norm(vf1)) / 2;
