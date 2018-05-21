@@ -73,8 +73,8 @@ lens.n1 = % TODO
 lens.n2 = % TODO
 
 % apply lensing to rays
-F_trans = apply_lensing_all(F, lens);
-
+% THE LAST PARAMETER TELLS THE FUNCTION IF WE WANT TO PLOT CONFIGURATION VISUALIZATIONS AS WELL.
+F_trans = apply_lensing_all(F, lens, 1);
 
 % ########################################################################################################
 
@@ -95,7 +95,7 @@ title("Transformed Image");
 % Optional: Plot the configurations of the light source, screens and rays in space.
 plot_config = input("Plot configuration? y/n ", 's');
 if strcmp(plot_config, "y")
-	
+	% TODO
 	% figure; plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
 	% grid on;
 	% hold on;
