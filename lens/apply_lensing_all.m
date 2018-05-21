@@ -4,7 +4,7 @@
 % line_equations ... cell array of function handles representing the rays before lensing.
 %
 % Authors: Katja Logar, Kim Ana Badovinac, Jernej Vivod
-function [] = apply_lensing_all(line_equations)
+function [transformed_line_equations] = apply_lensing_all(line_equations, lens)
 	% Create optional code for plotting/visualization
 	% IF NOT USED FOR PLOTTING/VISUALIZATION, ONLY THE FIRST RETURN VALUE OF apply_lensing FUNCTION IS NEEDED!
 	for k = 1:size(line_equations)(1)
