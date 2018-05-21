@@ -96,12 +96,11 @@ title("Transformed Image");
 plot_config = input("Plot configuration? y/n ", 's');
 if strcmp(plot_config, "y")
 	% TODO
-	% figure; plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
-	% grid on;
-	% hold on;
-	% plot_3d_vector(light_source_coordinates, 'r*');
-	% plot_screen(C);
-	% plot_rays(F_trans);
+	figure; plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
+	grid on;
+	hold on;
+	plot_3d_vector(light_source_coordinates, 'r*');
+	plot_screen(C);
 	% view(0,90);
 	
 endif
