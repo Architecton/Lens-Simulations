@@ -26,7 +26,7 @@
 % Authors: Kim Ana Badovinac, Katja Logar, Jernej Vivod
 %
 % IF NOT USED FOR PLOTTING/VISUALIZATION, ONLY THE FIRST RETURN VALUE IS NEEDED!
-function [ray_out, ray_inside, t_in, t_out, intersections] = apply_lensing(ray_in, lens)
+function [ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens)
 	% Compute intersection of line ray_in with lens (as it enters the lens)
 	% [intersection1, t_in] = TODO KIM
 	
@@ -47,7 +47,5 @@ function [ray_out, ray_inside, t_in, t_out, intersections] = apply_lensing(ray_i
 	
 	% Construct function of ray as it leaves the lens
 	ray_out = @(t) intersection2 + t*dir_vector_out;
-	
-	intersections = [intersection1, intersection2];
 	
 endfunction
