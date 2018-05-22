@@ -33,24 +33,24 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 				continue;
 			endif
 			% ########################################################################
-			
+			ray_fin = ray_out;
 			% If there was an intersection with the lens, check for any more intersections.
-			while !isempty(ray_out)
-				% Save current ray_out.
-				ray_fin = ray_out;
-				% Set current ray_out as ray_in.
-				ray_in = ray_out;	
-				% Try to find next intersection
-				[ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens);
-				% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING #####################
-				% Plot ray before hitting lens.
-				if !isempty(ray_out) && visualize
-					plot_ray(ray_in, t_in);
-					% Plot ray inside lens.
-					plot_ray(ray_inside, t_out);
-					% ########################################################################
-				endif
-			endwhile	
+			%while !isempty(ray_out)
+			%	% Save current ray_out.
+			%	ray_fin = ray_out;
+			%	% Set current ray_out as ray_in.
+			%	ray_in = ray_out;	
+			%	% Try to find next intersection
+			%	[ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens);
+			%	% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING #####################
+			%	% Plot ray before hitting lens.
+			%	if !isempty(ray_out) && visualize
+			%		plot_ray(ray_in, t_in);
+			%		% Plot ray inside lens.
+			%		plot_ray(ray_inside, t_out);
+			%		% ########################################################################
+			%	endif
+			%endwhile
 			% Put final equation representing the ray into the matrix containing the functions representing the rays.
 			transformed_line_equations(k, l) = ray_fin;
 			

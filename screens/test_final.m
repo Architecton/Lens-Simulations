@@ -1,3 +1,5 @@
+addpath(genpath('/home/jernej/Dropbox/MM/HAs/Lens-Simulations/lens'))
+
 % Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
 scaling_factor = input("Enter first screen scaling factor: ");
@@ -48,8 +50,9 @@ light_source_coordinates = [0; 0; 0];
 % Load image.
 image_selection = input("Use random image? y/n ", 's');
 if strcmp(image_selection, 'y')
-	load CatDog.mat;
-	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
+	%load CatDog.mat;
+	%testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
+	testing_image = rand(4, 4);
 else
 	load cat_picture.m;
 	testing_image = cat_picture;
@@ -68,13 +71,15 @@ F = make_line_functions(C, light_source_coordinates);
 % LENSING APPLICATION ####################################################################################
 
 % initialize lens
-lens.equation = % TODO
-lens.n1 = % TODO
-lens.n2 = % TODO
+lens.equation = @(x, y, z) (x - 1.5).^2 + y.^2 + (z - 0.5).^2 - 0.54772;
+lens.n1 = 1.00029; % air
+lens.n2 = 1.52; % glass
+% GOOD EXAMPLE FOR DEBUGGING
+% plot_ellipsoid([1.5; 0; 0.5], 0.3, [1; 1; 1]);
 
 % apply lensing to rays
 % THE LAST PARAMETER TELLS THE FUNCTION IF WE WANT TO PLOT CONFIGURATION VISUALIZATIONS AS WELL.
-F_trans = apply_lensing_all(F, lens, 1);
+F_trans = apply_lensing_all(F, lens, 0);
 
 % ########################################################################################################
 
@@ -101,6 +106,7 @@ if strcmp(plot_config, "y")
 	hold on;
 	plot_3d_vector(light_source_coordinates, 'r*');
 	plot_screen(C);
+	plot_rays(F);
 	% view(0,90);
 	
 endif

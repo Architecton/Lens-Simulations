@@ -41,10 +41,10 @@ function [ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens)
 	
 	% Compute directional vector of new parametrized line representing the ray inside the lens
 	% NOTE: the directional vector of the ray_in function can be extracted as: dir_vector = ray_in(1) - ray_in(0)
-	dir_vector_inside = lom(intersection1, ray_in(1) - ray_in(0), lens.n1, lens.n2, lens.equation);
+	dir_vector_inside = lom(intersection1', (ray_in(1) - ray_in(0))', lens.n1, lens.n2, lens.equation);
 	
 	% Construct function of ray inside lens using the computed directional vectorize
-	ray_inside = @(t) intersection1 + t*dir_vector_inside;
+	ray_inside = @(t) intersection1 + t*dir_vector_inside';
 	
 	% Compute intersection of ray_inside with the lens
 	[intersection2, t_out] = intersection_prototype(ray_inside, lens.equation);
@@ -52,9 +52,9 @@ function [ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens)
 	% Compute directional vector of new parametrized line representing the ray as it leaves the lens.
 	% NOTE: the directional vector of the ray_in function can be extracted as: dir_vector = ray_in(1) - ray_in(0)
 	% Also note swapping of n2 and n1 from previous call of this function.
-	dir_vector_out = lom(intersection2, ray_inside(1) - ray_inside(0), lens.n2, lens.n1, lens.equation);
+	dir_vector_out = lom(intersection2', (ray_inside(1) - ray_inside(0))', lens.n2, lens.n1, lens.equation);
 	
 	% Construct function of ray as it leaves the lens
-	ray_out = @(t) intersection2 + t*dir_vector_out;
+	ray_out = @(t) intersection2 + t*dir_vector_out';
 	
 endfunction
