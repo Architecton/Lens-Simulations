@@ -50,12 +50,11 @@ light_source_coordinates = [0; 0; 0];
 % Load image.
 image_selection = input("Use random image? y/n ", 's');
 if strcmp(image_selection, 'y')
-	%load CatDog.mat;
-	%testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
-	testing_image = rand(4, 4);
+	load CatDog.mat;
+	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
 else
-	load cat_picture.m;
-	testing_image = cat_picture;
+	load lena.mat;
+	testing_image = lena512;
 endif
 
 % Show original image

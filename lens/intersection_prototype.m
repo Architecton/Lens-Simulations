@@ -6,7 +6,18 @@ function [intersection, t] = intersection_prototype(ray_in, lens_equation)
 	g = @(t) lens_equation(xyz(1) + abc(1)*t, xyz(2) + abc(2)*t, xyz(3) + abc(3)*t);
 	
 	try
-		t = fzero(g, [0.01 1.5]);
+		% approach zero with steps	
+		end_bracket = 0.1;
+		initial_sign = sign(g(end_bracket));
+		while sign(g(end_bracket)) == initial_sign
+			end_bracket += 0.1;
+			if(end_bracket > 5)
+				t = -1;
+				intersection = [];
+				return
+			endif
+		endwhile
+		t = fzero(g, [end_bracket - 0.2, end_bracket]);
 		intersection = ray_in(t);
 	catch
 		t = -1;
