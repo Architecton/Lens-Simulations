@@ -28,7 +28,7 @@
 % IF NOT USED FOR PLOTTING/VISUALIZATION, ONLY THE FIRST RETURN VALUE IS NEEDED!
 function [ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens)
 	% Compute intersection of line ray_in with lens (as it enters the lens)
-	% [intersection1, t_in] = TODO KIM
+	[intersection1, t_in] = intersection_prototype(ray_in, lens.equation);
 	
 	% if there is NO INTERSECTION between the ray represented by the ray_in equation and the lens, return empty matrices.
 	if isempty(intersection1)
@@ -47,7 +47,7 @@ function [ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens)
 	ray_inside = @(t) intersection1 + t*dir_vector_inside;
 	
 	% Compute intersection of ray_inside with the lens
-	% [intersection2, t_out] = TODO KIM
+	[intersection2, t_out] = intersection_prototype(ray_inside, lens.equation);
 	
 	% Compute directional vector of new parametrized line representing the ray as it leaves the lens.
 	% NOTE: the directional vector of the ray_in function can be extracted as: dir_vector = ray_in(1) - ray_in(0)
