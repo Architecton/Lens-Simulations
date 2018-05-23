@@ -1,6 +1,6 @@
 FUNCTIONALITY
-* support for any multiply of 2 intersections
-* support for optional plotting of configuration and optional ray and normal plotting (all rays or just intersection rays)
+* support of color images
+* support for any multiple of 2 intersections  DONE -- !!! TEST !!!
 * Add choice of lens shape
 
 INTERACTIVITY
