@@ -27,9 +27,9 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 				
 				% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
 				% If there was no intersection with the lens, plot ray_in function
-				if visualize
-					plot_ray(ray_out, 7, 'r');	
-				endif
+				%if visualize
+				%	plot_ray(ray_out, 7, 'r');	
+				%endif
 				% ###################################################
 				
 				continue;

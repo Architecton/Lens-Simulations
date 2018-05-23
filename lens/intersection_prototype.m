@@ -21,8 +21,8 @@ function [intersection, t] = intersection_prototype(ray_in, lens_equation)
 		t = fzero(g, [end_bracket - 0.2, end_bracket]);
 		intersection = ray_in(t);
 		% Optional visualization/debugging code  ////
-		addpath(genpath('/home/jernej/Dropbox/MM/HAs/Lens-Simulations/screens'));
-		plot_3d_vector(intersection, 'yo');
+		%addpath(genpath('/home/jernej/Dropbox/MM/HAs/Lens-Simulations/screens'));
+		%plot_3d_vector(intersection, 'yo');
 		% ///////////////////////////////////////////
 	catch
 		t = -1;
