@@ -1,8 +1,7 @@
 FUNCTIONALITY
 * support for any multiply of 2 intersections
 * support for optional plotting of configuration and optional ray and normal plotting (all rays or just intersection rays)
-* make note that plotting of lens is only supported in MATLAB
-* MAIN SCRIPT FOR RUNNING THE SIMULATIONS IN A USER FRIENDLY MANNER
+* Add choice of lens shape
 
 INTERACTIVITY
 * Top down view of rays through sphere with changeable distance (image on right)
@@ -11,5 +10,6 @@ INTERACTIVITY
 
 IMAGES
 * High quality image transformed with spherical lens at certain distance
+* High quality image transformed with ellipsoid lens at certain distance
 * High quality image transformed with torus lens at certain distance
 * High quality image transformed with "Heart" lens at certain distance

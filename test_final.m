@@ -78,7 +78,7 @@ F = make_line_functions(C, light_source_coordinates);
 
 % Prompt for lens shape (let user choose from set of predefined equations)
 % Prompt for n1 and n2. Let users choose from list of materials or enter custom values.
-printf("\nChose the medium surrounding the lens:\n");
+printf("\nSelect the medium surrounding the lens:\n");
 printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n");
 
 while(1)
@@ -107,7 +107,7 @@ while(1)
 		endswitch
 endwhile
 
-printf("\nChose material the lens is made of:\n");
+printf("\nSelect material the lens is made of:\n");
 printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n");
 
 while(1)
@@ -136,10 +136,13 @@ while(1)
 	endswitch
 endwhile
 
+
+%printf("\nSelect shape of lens:\n");
+%printf("TODO");
+
 % initialize lens
 lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
-%lens.n1 = 1.00029; % air
-%lens.n2 = 1.52; % glass
+
 
 visualize = input("\nVisualize intersecting rays and screens? (WARNING: slow for large images) y/n ", 's');
 visualize_bin = 0;
