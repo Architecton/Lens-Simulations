@@ -13,3 +13,5 @@ IMAGES
 * High quality image transformed with ellipsoid lens at certain distance
 * High quality image transformed with torus lens at certain distance
 * High quality image transformed with "Heart" lens at certain distance
+
+* images of ball sphere lens with different refraction indices and rays

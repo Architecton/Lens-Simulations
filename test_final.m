@@ -1,11 +1,10 @@
 folder = fileparts(which(mfilename)); 
 addpath(genpath(folder));
 
-% Set format to 15 floating point decimal places.
-format long e;
-
 % Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
+
+% FOCUS -- USE 1 2 2.9 combination
 
 % UI instructions
 printf("The light source is fixed at point (0, 0, 0).\n");
@@ -156,7 +155,7 @@ endwhile
 %printf("TODO");
 
 % initialize lens
-lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
+lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 1).^2 - 0.64;
 
 % Prompt user for choice of input visualization.
 visualize = input("\nVisualize lens intersecting rays and screens? (WARNING: slow for large images) y/n ", 's');
@@ -167,6 +166,7 @@ if strcmp(visualize, 'y')
 	visualize_bin = 1;
 	im3 = figure('Name','Lens and Screens Configuration','NumberTitle','off');	
 endif
+
 
 % lensing application
 
@@ -199,6 +199,8 @@ title("Original Image");
 % Display transformed image.
 figure(im2);
 h2 = imagesc(transformed_image); colormap gray;
+% Save result to res.jpg
+saveas(h2, 'res.jpg');
 title("Transformed Image");
 
 % Additional code for the optional visualization function.
@@ -215,7 +217,8 @@ if visualize_bin
 	plot_screen(C);
 	% If user chose to plot lens...
 	if(strcmp(plot_shape, "y"))
-		plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
+		plot_ellipsoid([2.5; 0; 1], 0.8, [1; 1; 1]);
 	endif
 	axis equal
 endif
+printf("\nDone. The transformed image was saved to 'res.jpg'\n");
