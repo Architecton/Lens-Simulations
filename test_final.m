@@ -3,8 +3,13 @@ addpath(genpath(folder));
 
 % Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
-scaling_factor = input("Enter first screen scaling factor: ");
 
+printf("The light source is fixed at point (0, 0, 0).\n");
+printf("The first screen is at a fixed distance of 1 from the light source.\n");
+printf("The default length of the side of the first screen is 1 and can be scaled.\n");
+printf("\n");
+
+scaling_factor = input("Enter first screen scaling factor: ");
 % Define first screen spanning vectors.
 v1 = [0; 0; -1];
 v2 = [0; 1; 0];
@@ -23,6 +28,8 @@ v2 *= scaling_factor;
 % //////////////////////////////////////////////////////////////////
 
 % // Second Screen Configuration ///////////////////////////////////
+printf("\nThe default length of a side of the second screen is 2 and can be scaled.\n");
+printf("\n");
 scaling_factor = input("Enter second screen scaling factor: ");
 
 % Define second screen spanning vectors.
@@ -38,7 +45,7 @@ vf1 *= scaling_factor;
 vf2 *= scaling_factor;
 
 % Parse distance between screens.
-screen_distance = input("Enter distance between screens: ");
+screen_distance = input("\nEnter distance between screens: ");
 
 % Compute coordinates of the left upper corner of the first screen
 finalScreen_lu_coordinates = [1 + screen_distance; -1 - delta_scaling2; 2 + delta_scaling1*2];
@@ -49,19 +56,16 @@ finalScreen_lu_coordinates = [1 + screen_distance; -1 - delta_scaling2; 2 + delt
 light_source_coordinates = [0; 0; 0];
 
 % Load image.
-image_selection = input("Use random image? y/n ", 's');
+image_selection = input("\nUse random image? y/n ", 's');
 if strcmp(image_selection, 'y')
-	load CatDog.mat;
-	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
+	cd('test_images');	
+	load('CatDog.mat');
+	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64);
 else
 	%load cat_picture.m;
 	%testing_image = cat_picture;
 	testing_image = rand(8, 8);
 endif
-
-% Show original image
-%imagesc(testing_image); colormap gray;
-%title("Original Image");
 
 % Get matrix of coordinates of pixels on first screen.
 C = get_pixel_coordinates(screen_lu_coordinates, v1, v2, testing_image);
@@ -71,14 +75,24 @@ F = make_line_functions(C, light_source_coordinates);
 
 % LENSING APPLICATION ####################################################################################
 
+% Prompt for lens shape (let user choose from set of predefined equations)
+% Prompt for n1 and n2. Let users choose from list of materials or enter custom values.
+
 % initialize lens
 lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
 lens.n1 = 1.00029; % air
 lens.n2 = 1.52; % glass
 
+visualize = input("\nVisualize the system of screens and mirrors? (WARNING: only works in MATLAB) y/n ", 's');
+visualize_bin = 0;
+if strcmp(visualize, 'y')
+	visualize_bin = 1;
+	im3 = figure('Name','Lens and Screens Configuration','NumberTitle','off');	
+endif
+
 % apply lensing to rays
 % THE LAST PARAMETER TELLS THE FUNCTION IF WE WANT TO PLOT CONFIGURATION VISUALIZATIONS AS WELL.
-F_trans = apply_lensing_all(F, lens, 1);
+F_trans = apply_lensing_all(F, lens, visualize_bin);
 
 % ########################################################################################################
 
@@ -92,15 +106,22 @@ new_indices = get_intersection_indices(intersections, finalScreen_lu_coordinates
 % Get transformed image.
 transformed_image = get_transfromed_image(testing_image, indices, new_indices);
 
+% Show original image
+im1 = figure('Name','Original Image','NumberTitle','off');
+im2 = figure('Name','Transformed Image','NumberTitle','off');
+
+figure(im1);
+imagesc(testing_image); colormap gray;
+title("Original Image");
+
 % Display transformed image.
-figure; imagesc(transformed_image); colormap gray;
+figure(im2);
+h2 = imagesc(transformed_image); colormap gray;
 title("Transformed Image");
 
-% Optional: Plot the configurations of the light source, screens and rays in space.
-plot_config = input("Plot configuration? y/n ", 's');
-if strcmp(plot_config, "y")
-	% TODO
-	figure;
+
+if visualize_bin
+	figure(im3);
 	plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
 	grid on;
 	hold on;
@@ -111,3 +132,5 @@ if strcmp(plot_config, "y")
 	view(0, 90);
 	
 endif
+
+cd('..');
