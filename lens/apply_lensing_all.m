@@ -60,7 +60,7 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 			% If there was an intersection with the lens plot ray before, ray inside and ray after lens.
 			if visualize
 				plot_ray(ray_in, t_in, 'r');	
-				plot_ray(ray_inside, t_out, 'g');	
+				plot_ray(ray_inside, t_out, 'y');	
 				plot_ray(ray_fin, 7, 'b');
 			endif
 			% ########################################################################

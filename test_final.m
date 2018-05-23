@@ -141,9 +141,11 @@ lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
 %lens.n1 = 1.00029; % air
 %lens.n2 = 1.52; % glass
 
-visualize = input("\nVisualize the system of screens and mirrors? (WARNING: only works in MATLAB) y/n ", 's');
+visualize = input("\nVisualize intersecting rays and screens? (WARNING: slow for large images) y/n ", 's');
 visualize_bin = 0;
+plot_shape = 'n';
 if strcmp(visualize, 'y')
+	plot_shape = input("Plot lens? (WARNING: only works in MATLAB) y/n ", 's');	
 	visualize_bin = 1;
 	im3 = figure('Name','Lens and Screens Configuration','NumberTitle','off');	
 endif
@@ -177,7 +179,6 @@ figure(im2);
 h2 = imagesc(transformed_image); colormap gray;
 title("Transformed Image");
 
-
 if visualize_bin
 	figure(im3);
 	plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
@@ -185,8 +186,8 @@ if visualize_bin
 	hold on;
 	plot_3d_vector(light_source_coordinates, 'r*');
 	plot_screen(C);
-	plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
-	%plot_rays(F);
-	view(0, 90);
+	if(strcmp(plot_shape, "y"))
+		plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
+	endif
 	axis equal
 endif
