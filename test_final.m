@@ -1,6 +1,9 @@
 folder = fileparts(which(mfilename)); 
 addpath(genpath(folder));
 
+% Set format to 15 floating point decimal places.
+format long e;
+
 % Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
 
