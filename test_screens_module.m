@@ -1,7 +1,7 @@
-addpath(genpath('Lens-Simulations/lens'));
-addpath(genpath('Lens-Simulations/testing'))
+folder = fileparts(which(mfilename)); 
+addpath(genpath(folder));
 
-% Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
+% Author Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
 scaling_factor = input("Enter first screen scaling factor: ");
 
@@ -54,14 +54,13 @@ if strcmp(image_selection, 'y')
 	load CatDog.mat;
 	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
 else
-	%load cat_picture.m;
-	%testing_image = cat_picture;
-	testing_image = rand(8, 8);
+	load cat_picture.m;
+	testing_image = cat_picture;
 endif
 
 % Show original image
-%imagesc(testing_image); colormap gray;
-%title("Original Image");
+imagesc(testing_image); colormap gray;
+title("Original Image");
 
 % Get matrix of coordinates of pixels on first screen.
 C = get_pixel_coordinates(screen_lu_coordinates, v1, v2, testing_image);
@@ -69,22 +68,9 @@ C = get_pixel_coordinates(screen_lu_coordinates, v1, v2, testing_image);
 % Construct line equations representing rays going through light source and pixle on first screen.
 F = make_line_functions(C, light_source_coordinates);
 
-% LENSING APPLICATION ####################################################################################
-
-% initialize lens
-lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
-lens.n1 = 1.00029; % air
-lens.n2 = 1.52; % glass
-
-% apply lensing to rays
-% THE LAST PARAMETER TELLS THE FUNCTION IF WE WANT TO PLOT CONFIGURATION VISUALIZATIONS AS WELL.
-F_trans = apply_lensing_all(F, lens, 1);
-
-% ########################################################################################################
-
 % Get instersection coordinates of rays with second screen.
 % The indices matrix stores the index of the pixel whose ray intersected.
-[intersections, indices] = get_intersections_finalScreen(F_trans, finalScreen_lu_coordinates, vf1, vf2);
+[intersections, indices] = get_intersections_finalScreen(F, finalScreen_lu_coordinates, vf1, vf2);
 
 % Compute indices of pixels that were intersected by each ray.
 new_indices = get_intersection_indices(intersections, finalScreen_lu_coordinates, vf1, vf2, size(testing_image));
@@ -99,15 +85,13 @@ title("Transformed Image");
 % Optional: Plot the configurations of the light source, screens and rays in space.
 plot_config = input("Plot configuration? y/n ", 's');
 if strcmp(plot_config, "y")
-	% TODO
-	figure;
-	plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
+	
+	figure; plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
 	grid on;
 	hold on;
 	plot_3d_vector(light_source_coordinates, 'r*');
 	plot_screen(C);
-	plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
-	%plot_rays(F);
-	view(0, 90);
+	plot_rays(F);
+	view(0,90);
 	
 endif

@@ -1,4 +1,3 @@
-
 function [intersection, t] = intersection_prototype(ray_in, lens_equation)
 	% Get needed parameters for function which has zeros at t's where ray_in intersects with lens.	
 	xyz = ray_in(0);	

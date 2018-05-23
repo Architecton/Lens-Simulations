@@ -1,3 +1,6 @@
+folder = fileparts(which(mfilename)); 
+addpath(genpath(folder));
+
 % Author: Jernej Vivod
 vals = linspace(0.01, 2.5, 250);
 	for k = 1:length(vals)
