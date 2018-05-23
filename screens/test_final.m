@@ -1,4 +1,5 @@
-addpath(genpath('/home/jernej/Dropbox/MM/HAs/Lens-Simulations/lens'))
+addpath(genpath('/home/jernej/Dropbox/MM/HAs/Lens-Simulations/lens'));
+addpath(genpath('/home/jernej/Dropbox/MM/HAs/Lens-Simulations/testing'))
 
 % Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
@@ -53,12 +54,13 @@ if strcmp(image_selection, 'y')
 	load CatDog.mat;
 	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64); colormap gray;
 else
-	load lena.mat;
-	testing_image = lena512;
+	%load cat_picture.m;
+	%testing_image = cat_picture;
+	testing_image = rand(16, 16);
 endif
 
 % Show original image
-imagesc(testing_image); colormap gray;
+% imagesc(testing_image); colormap gray;
 title("Original Image");
 
 % Get matrix of coordinates of pixels on first screen.
@@ -70,15 +72,13 @@ F = make_line_functions(C, light_source_coordinates);
 % LENSING APPLICATION ####################################################################################
 
 % initialize lens
-lens.equation = @(x, y, z) (x - 1.5).^2 + y.^2 + (z - 0.5).^2 - 0.54772;
+lens.equation = @(x, y, z) (x - 2.5).^2 + y.^2 + (z - 0.5).^2 - 1;
 lens.n1 = 1.00029; % air
 lens.n2 = 1.52; % glass
-% GOOD EXAMPLE FOR DEBUGGING
-% plot_ellipsoid([1.5; 0; 0.5], 0.3, [1; 1; 1]);
 
 % apply lensing to rays
 % THE LAST PARAMETER TELLS THE FUNCTION IF WE WANT TO PLOT CONFIGURATION VISUALIZATIONS AS WELL.
-F_trans = apply_lensing_all(F, lens, 0);
+F_trans = apply_lensing_all(F, lens, 1);
 
 % ########################################################################################################
 
@@ -90,22 +90,23 @@ F_trans = apply_lensing_all(F, lens, 0);
 new_indices = get_intersection_indices(intersections, finalScreen_lu_coordinates, vf1, vf2, size(testing_image));
 
 % Get transformed image.
-transformed_image = get_transfromed_image(testing_image, indices, new_indices);
+% transformed_image = get_transfromed_image(testing_image, indices, new_indices);
 
 % Display transformed image.
-figure; imagesc(transformed_image); colormap gray;
-title("Transformed Image");
+%figure; imagesc(transformed_image); colormap gray;
+%title("Transformed Image");
 
 % Optional: Plot the configurations of the light source, screens and rays in space.
 plot_config = input("Plot configuration? y/n ", 's');
 if strcmp(plot_config, "y")
 	% TODO
-	figure; plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
+	plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
 	grid on;
 	hold on;
 	plot_3d_vector(light_source_coordinates, 'r*');
 	plot_screen(C);
-	plot_rays(F);
-	% view(0,90);
+	plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
+	%plot_rays(F);
+	view(0,90);
 	
 endif

@@ -35,7 +35,7 @@ function [intersections, indices] = get_intersections_finalScreen(line_functions
       
 			% Solve for t, u and v (t is the line parameter, u and v are the coefficients of the plane spanning vectors).
       tuv = A\b;
-      
+			
 			% Evaluate line equation at computed parameter to get coordinates of intersection.
       intersection = func(tuv(1, 1));
       

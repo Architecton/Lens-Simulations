@@ -26,9 +26,11 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 				transformed_line_equations(k, l) = ray_out;
 				
 				% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
+				% If there was no intersection with the lens, plot ray_in function
 				if visualize
-					% TODO					
+					plot_ray(ray_out, 7, 'r');	
 				endif
+				% ###################################################
 				
 				continue;
 			endif
@@ -55,9 +57,11 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 			transformed_line_equations(k, l) = ray_fin;
 			
 			% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
-			% Plot ray after leaving lens (7 is an arbitrary value and can be changed).
+			% If there was an intersection with the lens plot ray before, ray inside and ray after lens.
 			if visualize
-				plot_ray(ray_out, 7);
+				plot_ray(ray_in, t_in, 'r');	
+				plot_ray(ray_inside, t_out, 'g');	
+				plot_ray(ray_fin, 7, 'b');
 			endif
 			% ########################################################################
 		endfor

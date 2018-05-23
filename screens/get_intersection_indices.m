@@ -36,9 +36,9 @@ function [intersection_indices] = get_intersection_indices(intersections, finalS
 		endif
 		
 		% Use scaling coefficients to compute index of pixel on final screen.
-		i = ceil(scaling_coefficients(1)/delta1);
-		j = ceil(scaling_coefficients(2)/delta2);
-		intersection_indices = [intersection_indices, [i; j]];
+		index_1 = ceil(scaling_coefficients(1)/delta1);
+		index_2 = ceil(scaling_coefficients(2)/delta2);
+		intersection_indices = [intersection_indices, [index_1; index_2]];
 		
 	endfor
 endfunction

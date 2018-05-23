@@ -10,8 +10,9 @@
 % t_end ... the parameter of the line equation which, given to the equation, gives the end point at which to stop plotting.
 %
 % Author: Jernej Vivod
-function [] = plot_ray(line_function, t_end)	
+function [] = plot_ray(line_function, t_end, color)	
 	start_point = line_function(0);
 	end_point = line_function(t_end);
-	plot3([start_point(1), end_point(1)], [start_point(2), end_point(2)], [start_point(3), end_point(3)], 'r');
+	plot3([start_point(1), end_point(1)], [start_point(2), end_point(2)], [start_point(3), end_point(3)], color);
+	hold on;
 endfunction
