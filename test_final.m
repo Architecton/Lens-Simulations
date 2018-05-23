@@ -61,6 +61,7 @@ if strcmp(image_selection, 'y')
 	cd('test_images');	
 	load('CatDog.mat');
 	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64);
+	cd('..');
 else
 	%load cat_picture.m;
 	%testing_image = cat_picture;
@@ -77,11 +78,68 @@ F = make_line_functions(C, light_source_coordinates);
 
 % Prompt for lens shape (let user choose from set of predefined equations)
 % Prompt for n1 and n2. Let users choose from list of materials or enter custom values.
+printf("\nChose the medium surrounding the lens:\n");
+printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n");
+
+while(1)
+	n = input("");
+	switch n
+		case 1	
+			lens.n1 = 1;
+			break;
+		case 2
+			lens.n1 = 1.000277;
+			break;
+		case 3
+			lens.n1 = 1.458; 
+			break;
+		case 4
+			lens.n1 = 1.330;
+			break;
+		case 5
+			lens.n1 = 1.31;
+			break;
+		case 6
+			lens.n1 = 2.417;
+			break;
+		otherwise
+			printf("Please enter a valid option.\n");
+		endswitch
+endwhile
+
+printf("\nChose material the lens is made of:\n");
+printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n");
+
+while(1)
+	n = input("");
+	switch n
+		case 1	
+			lens.n2 = 1;
+			break;
+		case 2
+			lens.n2 = 1.000277;
+			break;
+		case 3
+			lens.n2 = 1.458; 
+			break;
+		case 4
+			lens.n2 = 1.330;
+			break;
+		case 5
+			lens.n2 = 1.31;
+			break;
+		case 6
+			lens.n2 = 2.417;
+			break;
+		otherwise
+			printf("Please enter a valid option.\n");
+	endswitch
+endwhile
 
 % initialize lens
 lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
-lens.n1 = 1.00029; % air
-lens.n2 = 1.52; % glass
+%lens.n1 = 1.00029; % air
+%lens.n2 = 1.52; % glass
 
 visualize = input("\nVisualize the system of screens and mirrors? (WARNING: only works in MATLAB) y/n ", 's');
 visualize_bin = 0;
@@ -130,7 +188,5 @@ if visualize_bin
 	plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
 	%plot_rays(F);
 	view(0, 90);
-	
+	axis equal
 endif
-
-cd('..');
