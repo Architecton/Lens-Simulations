@@ -4,12 +4,14 @@ addpath(genpath(folder));
 % Authors Kim Ana Badovinac, Katja Logar, Jernej Vivod
 % // First Screen Configuration ///////////////////////////////////
 
+% UI instructions
 printf("The light source is fixed at point (0, 0, 0).\n");
 printf("The first screen is at a fixed distance of 1 from the light source.\n");
 printf("The default length of the side of the first screen is 1 and can be scaled.\n");
 printf("\n");
 
 scaling_factor = input("Enter first screen scaling factor: ");
+
 % Define first screen spanning vectors.
 v1 = [0; 0; -1];
 v2 = [0; 1; 0];
@@ -55,14 +57,16 @@ finalScreen_lu_coordinates = [1 + screen_distance; -1 - delta_scaling2; 2 + delt
 % Set light source coordinates.
 light_source_coordinates = [0; 0; 0];
 
-% Load image.
+% Let user choose image
 image_selection = input("\nUse random image? y/n ", 's');
 if strcmp(image_selection, 'y')
+	% Load random image from CatDog set.	
 	cd('test_images');	
 	load('CatDog.mat');
 	testing_image = reshape(CatDog(ceil(rand()* size(CatDog)(1)), :), 64, 64);
 	cd('..');
 else
+	% Load the cat_picture.m image.
 	%load cat_picture.m;
 	%testing_image = cat_picture;
 	testing_image = rand(8, 8);
@@ -77,9 +81,10 @@ F = make_line_functions(C, light_source_coordinates);
 % LENSING APPLICATION ####################################################################################
 
 % Prompt for lens shape (let user choose from set of predefined equations)
-% Prompt for n1 and n2. Let users choose from list of materials or enter custom values.
+
+% Prompt for n1 and n2. Let users choose from list of materials.
 printf("\nSelect the medium surrounding the lens:\n");
-printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n");
+printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n7 --- Custom Value\n");
 
 while(1)
 	n = input("");
@@ -102,13 +107,17 @@ while(1)
 		case 6
 			lens.n1 = 2.417;
 			break;
+		case 7
+			lens.n1 = input("Enter refraction index: ");
+			break;
 		otherwise
 			printf("Please enter a valid option.\n");
 		endswitch
 endwhile
 
+% Prompt for n1 and n2. Let users choose from list of materials.
 printf("\nSelect material the lens is made of:\n");
-printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n");
+printf("1 --- Vacuum\n2 --- Air\n3 --- Glass\n4 --- Water\n5 --- Ice\n6 --- Diamond\n7 --- Custom Value\n");
 
 while(1)
 	n = input("");
@@ -131,6 +140,9 @@ while(1)
 		case 6
 			lens.n2 = 2.417;
 			break;
+		case 7
+			lens.n2 = input("Enter refraction index: ");
+			break;
 		otherwise
 			printf("Please enter a valid option.\n");
 	endswitch
@@ -143,8 +155,8 @@ endwhile
 % initialize lens
 lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 0.5).^2 - 1;
 
-
-visualize = input("\nVisualize intersecting rays and screens? (WARNING: slow for large images) y/n ", 's');
+% Prompt user for choice of input visualization.
+visualize = input("\nVisualize lens intersecting rays and screens? (WARNING: slow for large images) y/n ", 's');
 visualize_bin = 0;
 plot_shape = 'n';
 if strcmp(visualize, 'y')
@@ -153,9 +165,12 @@ if strcmp(visualize, 'y')
 	im3 = figure('Name','Lens and Screens Configuration','NumberTitle','off');	
 endif
 
-% apply lensing to rays
-% THE LAST PARAMETER TELLS THE FUNCTION IF WE WANT TO PLOT CONFIGURATION VISUALIZATIONS AS WELL.
-F_trans = apply_lensing_all(F, lens, visualize_bin);
+% lensing application
+
+% MULTIPLE ENTRIES --- THIS IS SET WHEN THE USER CHOOSES THE LENS SHAPE
+% IF SHAPE IS CONCAVE THIS VALUE SHOULD BE SET TO 1 AND 0 OTHERWISE
+multiple_entries = 0;
+F_trans = apply_lensing_all(F, lens, visualize_bin, multiple_entries);
 
 % ########################################################################################################
 
@@ -169,11 +184,12 @@ new_indices = get_intersection_indices(intersections, finalScreen_lu_coordinates
 % Get transformed image.
 transformed_image = get_transfromed_image(testing_image, indices, new_indices);
 
-% Show original image
+% Initialize two figures - one for original image and one for transformed image.
 im1 = figure('Name','Original Image','NumberTitle','off');
 im2 = figure('Name','Transformed Image','NumberTitle','off');
 
 figure(im1);
+% Display original image.
 imagesc(testing_image); colormap gray;
 title("Original Image");
 
@@ -182,13 +198,19 @@ figure(im2);
 h2 = imagesc(transformed_image); colormap gray;
 title("Transformed Image");
 
+% Additional code for the optional visualization function.
+% visualize_bin was set when user was prompted for ray and screen visualization choice.
 if visualize_bin
 	figure(im3);
+	% Plot vectors spanning the second screen.
 	plot_finalScreen_frame(finalScreen_lu_coordinates, vf1, vf2);
 	grid on;
 	hold on;
+	% Plot the light source as *
 	plot_3d_vector(light_source_coordinates, 'r*');
+	% Plot the vectors spanning the first screen.
 	plot_screen(C);
+	% If user chose to plot lens...
 	if(strcmp(plot_shape, "y"))
 		plot_ellipsoid([2.5; 0; 0.5], 1, [1; 1; 1]);
 	endif
