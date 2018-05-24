@@ -11,7 +11,7 @@ function [intersection, t] = intersection_prototype(ray_in, lens_equation)
 		initial_sign = sign(g(end_bracket));
 		while sign(g(end_bracket)) == initial_sign
 			end_bracket += 0.1;
-			if(end_bracket > 5)
+			if(end_bracket > 3)
 				t = -1;
 				intersection = [];
 				return

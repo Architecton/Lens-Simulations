@@ -71,7 +71,9 @@ else
 	% Load the cat_picture.m image.
 	%load cat_picture.m;
 	%testing_image = cat_picture;
-	testing_image = rand(8, 8);
+	cd('test_images');
+	load im.m;
+	testing_image = im;
 endif
 
 % Get matrix of coordinates of pixels on first screen.
@@ -155,7 +157,7 @@ endwhile
 %printf("TODO");
 
 % initialize lens
-lens.equation = @(x, y, z) ((x - 2.5).^2) + y.^2 + (z - 1).^2 - 0.64;
+lens.equation = @(x, y, z) ((x - 2.5).^2)/(0.2^2) + y.^2 + (z - 1).^2 - 0.64;
 
 % Prompt user for choice of input visualization.
 visualize = input("\nVisualize lens intersecting rays and screens? (WARNING: slow for large images) y/n ", 's');
@@ -217,7 +219,7 @@ if visualize_bin
 	plot_screen(C);
 	% If user chose to plot lens...
 	if(strcmp(plot_shape, "y"))
-		plot_ellipsoid([2.5; 0; 1], 0.8, [1; 1; 1]);
+		plot_ellipsoid([2.5; 0; 1], 0.8, [0.2; 1; 1]);
 	endif
 	axis equal
 endif
