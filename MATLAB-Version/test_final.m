@@ -77,7 +77,7 @@ else
 endif
 
 % Get matrix of coordinates of pixels on first screen.
-C = get_pixel_coordinates(screen_lu_coordinates, v1, v2, testing_image);
+C = get_pixel_coordinates(screen_lu_coordinates, v1, v2, size(testing_image));
 
 % Construct line equations representing rays going through light source and pixle on first screen.
 F = make_line_functions(C, light_source_coordinates);
