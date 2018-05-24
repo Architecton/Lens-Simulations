@@ -1,7 +1,7 @@
 FUNCTIONALITY
-* support of color images
 * support for any multiple of 2 intersections  DONE -- !!! TEST !!!
 * Add choice of lens shape
+* fix lom function formatting
 
 INTERACTIVITY
 * Top down view of rays through sphere with changeable distance (image on right)
