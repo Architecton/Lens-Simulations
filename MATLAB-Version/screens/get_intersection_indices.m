@@ -17,7 +17,7 @@ function [intersection_indices] = get_intersection_indices(intersections, finalS
 	delta2 = 1/image_dimensions(2);
 	
 	% Define matrix for storing indices of pixels that were intersected.
-	intersection_indices = [];
+	intersection_indices = zeros(2, size(intersections)(2));
 	
 	for k = 1:size(intersections)(2)
 		intersection = intersections(:, k);
@@ -38,7 +38,8 @@ function [intersection_indices] = get_intersection_indices(intersections, finalS
 		% Use scaling coefficients to compute index of pixel on final screen.
 		index_1 = ceil(scaling_coefficients(1)/delta1);
 		index_2 = ceil(scaling_coefficients(2)/delta2);
-		intersection_indices = [intersection_indices, [index_1; index_2]];
+		
+		intersection_indices(:, k) = [index_1; index_2];
 		
 	endfor
 endfunction

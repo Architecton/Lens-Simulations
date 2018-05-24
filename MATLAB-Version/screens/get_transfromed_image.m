@@ -9,9 +9,15 @@
 function [transformed_image] = get_transfromed_image(testing_image, indices, new_indices)
 	% Prepare blank image.
 	transformed_image = uint8(zeros(size(testing_image)));
+	
+	% TO GPU ARRAY (both testing image and transformed image)
+	
 	% Go over all pixels that intersected
 	for k = 1:size(indices)(2)
 		% Transform the pixel to the color of the pixel that the ray intersected.	
 		transformed_image(indices(:, k)(1), indices(:, k)(2), :) = testing_image(new_indices(:, k)(1), new_indices(:, k)(2), :);
 	endfor
+	
+	% TRANSFORMED IMAGE BACK TO CPU ARRAY
+	
 endfunction
