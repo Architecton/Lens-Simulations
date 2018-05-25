@@ -17,6 +17,6 @@ function [] = plot_finalScreen_frame(finalScreen_lu_coordinates, scaling_vector_
   z_coordinates = [finalScreen_lu_coordinates(3), finalScreen_lu_coordinates(3) + scaling_vector_2(3)];
   h2 = plot3(x_coordinates, y_coordinates, z_coordinates, 'g');
   
-	set([h1 h2],'LineWidth',4);
+  set([h1 h2],'LineWidth',4);
 	
-endfunction
+end

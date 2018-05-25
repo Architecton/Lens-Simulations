@@ -5,8 +5,8 @@
 % Author: Jernej Vivod
 function [] = plot_intersections(intersections)
 	% Go over intersections and plot as point.
-  for k = 1:size(intersections)(2)
+  parfor k = 1:length(intersections)
     vect = intersections(:, k);
     plot_3d_vector(vect, 'g*');
-  endfor
-endfunction
+  end
+end

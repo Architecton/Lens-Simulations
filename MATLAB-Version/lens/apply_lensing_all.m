@@ -15,7 +15,7 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 	
 	% Go over all equations of lines rrepresenting the rays.
 	% Use parallel for loop as computations for each ray are independent of other rays.
-	for k = 1:length(line_equations)
+    for k = 1:length(line_equations)
 		% Get equation of ray is it enters the lens.	
 		ray_in = line_equations{k};
 		
@@ -24,10 +24,10 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 		
 		% ########################################################################
 		% If there was no intersection with the lens, set ray_out equal to ray_in (no change)
-		if isempty(ray_out)
+        if isempty(ray_out)
 			ray_out = ray_in;
 			% go to next ray
-			transformed_line_equations(k) = ray_out;
+			transformed_line_equations{k} = ray_out;
 			
 			% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
 			% If there was no intersection with the lens, plot ray_in function
@@ -37,15 +37,15 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 			% ###################################################
 			
 			continue;
-		endif
+        end
 		% ########################################################################
-		ray_fin = ray_out;
+        ray_fin = ray_out;
 		
 		% If multiple entries into the lens are possible (This check is a runtime saving measure)
 		found_additional_intersections = 0;
-		if(multiple_entries)
+        if (multiple_entries)
 			% If there was an intersection with the lens, check for any more intersections.
-			while !isempty(ray_out)
+            while ~isempty(ray_out)
 				% Save current ray_out.
 				ray_fin = ray_out;
 				% Set current ray_out as ray_in.
@@ -54,28 +54,28 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 				[ray_out, ray_inside_aux, t_in_aux, t_out_aux] = apply_lensing(ray_in_aux, lens);
 				% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING #####################
 				% Plot ray before hitting lens.
-				if !isempty(ray_out) && visualize
+                if ~isempty(ray_out) && visualize
 					found_additional_intersections = 1;	
 					plot_ray(ray_in, t_in_aux, 'r');
 					% Plot ray inside lens.
 					plot_ray(ray_inside_aux, t_out_aux, 'y');
 					% ########################################################################
-				endif
-			endwhile
-		endif
+                end
+            end
+        end
 		% Put final equation representing the ray into the matrix containing the functions representing the rays.
-		transformed_line_equations(k) = ray_fin;
+        transformed_line_equations{k} = ray_fin;
 		
 		% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
 		% If there was an intersection with the lens plot ray before, ray inside and ray after lens.
-		if visualize
-			if(!found_additional_intersections)	
+        if visualize
+            if(~found_additional_intersections)	
 				plot_ray(ray_in, t_in, 'r');
 				plot_ray(ray_inside, t_out, 'y');
-			endif
+            end
 			plot_ray(ray_fin, 7, 'b');
-		endif
-		% ########################################################################
-	endfor
-	transformed_line_equations = reshape(transformed_line_equations, original_image_dimensions);
-endfunction
+        end
+		% #######################################################################
+    end
+    transformed_line_equations = reshape(transformed_line_equations, original_image_dimensions);
+end

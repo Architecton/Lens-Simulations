@@ -8,4 +8,4 @@
 function [] = plot_3d_vector(vect, color)
   plot3(vect(1), vect(2), vect(3), color);
   hold on;
-endfunction
+end

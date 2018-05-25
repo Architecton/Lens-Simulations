@@ -15,4 +15,4 @@ function [] = plot_screen(pixel_coordinates)
 	%l4 = plot3([B(1) D(1)], [B(2) D(2)], [B(3) D(3)], 'b');
 	
 	set([l1 l3], 'LineWidth', 4);
-endfunction
+end

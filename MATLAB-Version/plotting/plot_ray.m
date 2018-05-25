@@ -15,4 +15,4 @@ function [] = plot_ray(line_function, t_end, color)
 	end_point = line_function(t_end);
 	plot3([start_point(1), end_point(1)], [start_point(2), end_point(2)], [start_point(3), end_point(3)], color);
 	hold on;
-endfunction
+end

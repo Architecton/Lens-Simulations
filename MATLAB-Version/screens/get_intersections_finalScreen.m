@@ -50,20 +50,20 @@ function [intersections, indices] = get_intersections_finalScreen(line_functions
 		
 		% If scaling coefficients for plane spanning vectors lie on [0, 1], the point is on the parallelogram spanned
 		% by the two vectors.
-		if !all(scaling_coefficients >= [0; 0]) || !all(scaling_coefficients <= [1; 1])
+        if ~all(scaling_coefficients >= [0; 0]) || ~all(scaling_coefficients <= [1; 1])
 			continue
-		endif
+        end
 		
 		% If it does, add to matrix of intersections.
-		intersections(:, k + 1) = [intersection];
+		intersections(:, k + 1) = intersection;
 		
 		% Add index of pixel whose ray intersected to indices array.
-		indices(:, k + 1) = [idivide(k, original_dims(1)) + 1; mod(k, original_dims(1)) + 1];
+		indices(:, k + 1) = [fix(k / original_dims(1)) + 1; mod(k, original_dims(1)) + 1];
 		
-  endfor
+  end
   
 	% Delete columns of all zeros.
 	indices(:, ~any(indices, 1)) = [];
 	intersections(:, ~any(intersections, 1)) = [];
 	
-endfunction
+end

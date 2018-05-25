@@ -18,5 +18,5 @@ function [] = plot_torus(R, r, center)
 	h = mesh(x - center(1), y - center(2), z - center(3));
 	rotate(h, [0 1 0], 90);
 	axis equal
-endfunction
+end
 	

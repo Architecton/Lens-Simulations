@@ -11,4 +11,4 @@ function [] = plot_ellipsoid(center, scaling, stretch_factors)
 	[x, y, z] = sphere;
 	mesh(stretch_factors(1)*scaling*x + center(1), stretch_factors(2)*scaling*y + center(2), stretch_factors(3)*scaling*z + center(3));
 	% axis equal
-endfunction
+end

@@ -71,9 +71,9 @@ else
 	% Load the cat_picture.m image.
 	%load cat_picture.m;
 	%testing_image = cat_picture;
-	cd('test_images');
-	load im.m;
-	testing_image = im;
+	% cd('test_images');
+	% load im.m;
+	testing_image = rand(8, 8);
 endif
 
 % Get matrix of coordinates of pixels on first screen.

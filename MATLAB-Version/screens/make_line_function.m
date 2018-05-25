@@ -7,6 +7,6 @@
 % Author: Jernej vivod
 
 function [func] = make_line_function(pixel_coordinates, light_source_coodinates)
- pixel_coordinates = cell2mat(pixel_coordinates);
- func = @(t) light_source_coodinates + t.*(pixel_coordinates - light_source_coodinates);
-endfunction
+    pixel_coordinates = cell2mat(pixel_coordinates);
+    func = @(t) light_source_coodinates + t.*(pixel_coordinates - light_source_coodinates);
+end
