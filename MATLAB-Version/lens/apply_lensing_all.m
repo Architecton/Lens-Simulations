@@ -2,12 +2,16 @@
 % Apply the lensing function to all line equations representing the rays
 %
 % line_equations ... cell array of function handles representing the rays before lensing.
+% lens ... structure representing the lens
+% visualize ... if set to 1, the function will plot the rays as lines.
+% multiple_entries ... If the lens shape could cause a ray to enter the
+% lens multiple times, this is set to 1. Setting it to 0 for other types of
+% lenses saves computation time.
 %
 % Authors: Katja Logar, Kim Ana Badovinac, Jernej Vivod
 function [transformed_line_equations] = apply_lensing_all(line_equations, lens, visualize, multiple_entries)
 	% Create optional code for plotting/visualization
 	% IF NOT USED FOR PLOTTING/VISUALIZATION, ONLY THE FIRST RETURN VALUE OF apply_lensing FUNCTION IS NEEDED!
-	
 	% Reshape to row vector for use with parallelized for loop
 	original_image_dimensions = size(line_equations);
 	line_equations = reshape(line_equations, [1, numel(line_equations)]);
@@ -31,9 +35,9 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 			
 			% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
 			% If there was no intersection with the lens, plot ray_in function
-			%if visualize
-			%	plot_ray(ray_out, 7, 'r');	
-			%endif
+			if visualize && mod(k, 100) == 0
+				plot_ray(ray_out, 7, 'r');	
+			end
 			% ###################################################
 			
 			continue;
@@ -68,12 +72,12 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 		
 		% OPTIONAL CODE USED FOR VISUALIZATION AND DEBUGGING
 		% If there was an intersection with the lens plot ray before, ray inside and ray after lens.
-        if visualize
-            if(~found_additional_intersections)	
+        if visualize && mod(k, 100) == 0
+            if(~found_additional_intersections)
 				plot_ray(ray_in, t_in, 'r');
-				plot_ray(ray_inside, t_out, 'y');
+				plot_ray(ray_inside, t_out, 'g');
             end
-			plot_ray(ray_fin, 7, 'b');
+			plot_ray(ray_fin, 5, 'b');
         end
 		% #######################################################################
     end

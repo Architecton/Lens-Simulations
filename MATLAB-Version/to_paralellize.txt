@@ -1,8 +1,0 @@
-get_pixel_coordinates @ line 33
-apply_lensing_all @ line 18
-make_line_functions @ line 20
-get_intersection_indices @ line 24
-get_intersections_finalScreen @ line 25
-get_transformed_image @ line 13
-
-get_transformed_image -- IMAGES AS GPU ARRAYS

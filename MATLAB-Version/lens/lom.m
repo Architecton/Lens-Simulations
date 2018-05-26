@@ -9,18 +9,13 @@ function w = lom(T, v, n1, n2, leca, first)
     %vrne nov vektor, ki se lomi po lomnem zakonu
     %  feval(leca,T(1), T(2), T(3))
     n = grad(leca, T)'; %normala na ploskev v tocki T
-    
-    % Optional code used for plotting 
-    %normal = @(t) T' + t.*n;
-    %plot_ray(normal , 5, 'y');	
-    
-    
+        
     %lomni zakon v vektorski obliki
     v = v/norm(v);
     n = n/norm(n);
     if first
         w = (n1/n2).*(cross(n, cross(-n,v)))-n.*sqrt(1-(((n1/n2).^2) .* dot(cross(n,v), cross(n,v))));
     else
-        w = (n1/n2).*(cross(n, cross(n,v)))-n.*sqrt(1-(((n1/n2).^2) .* dot(cross(n,v), cross(n,v))));
+        w = (n1/n2).*(cross(n, cross(n,v)))-n.*sqrt(1-(((n1/n2).^2) .* dot(cross(-n,v), cross(n,v))));
     end
 end

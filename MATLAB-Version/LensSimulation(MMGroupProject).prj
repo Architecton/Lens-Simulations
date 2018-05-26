@@ -1,0 +1,89 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="1454980821" file="/home/jernej/Dropbox/MM/HAs/Lens-Simulations/MATLAB-Version/LensSimulation(MMGroupProject).prj" location="/home/jernej/Dropbox/MM/HAs/Lens-Simulations/MATLAB-Version" name="LensSimulation(MMGroupProject)" target="target.mlapps" target-name="Package App">
+    <param.appname>LensSimulation(MMGroupProject)</param.appname>
+    <param.authnamewatermark>Jernej Vivod</param.authnamewatermark>
+    <param.email>je.vivod@gmail.com</param.email>
+    <param.company>Fakulteta za Računalništvo in Informatiko</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary>GUI for the final group project for the Mathematical Modeling class.</param.summary>
+    <param.description>Implements basic ray tracing to visualize rays interacting with lens given by an implicit equation.</param.description>
+    <param.screenshot>/tmp/tp6d57042a_d2c2_4736_b91b_9f32ffdb61fd.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>/home/jernej/Dropbox/MM/HAs/Lens-Simulations/MATLAB-Version</param.output>
+    <param.guid>18304626-738a-429f-ae18-b6e102fa2e4f</param.guid>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/app2.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/lens/apply_lensing.m</file>
+      <file>${PROJECT_ROOT}/lens/apply_lensing_all.m</file>
+      <file>${PROJECT_ROOT}/lens/grad.m</file>
+      <file>${PROJECT_ROOT}/lens/intersection_prototype.m</file>
+      <file>${PROJECT_ROOT}/lens/lom.m</file>
+      <file>${PROJECT_ROOT}/lens_equations/make_ellipsoid.m</file>
+      <file>${PROJECT_ROOT}/lens_equations/make_torus.m</file>
+      <file>${PROJECT_ROOT}/plotting/plot_3d_vector.m</file>
+      <file>${PROJECT_ROOT}/plotting/plot_ellipsoid.m</file>
+      <file>${PROJECT_ROOT}/plotting/plot_finalScreen_frame.m</file>
+      <file>${PROJECT_ROOT}/plotting/plot_ray.m</file>
+      <file>${PROJECT_ROOT}/plotting/plot_screen.m</file>
+      <file>${PROJECT_ROOT}/run_simulation.m</file>
+      <file>${PROJECT_ROOT}/screens/get_coordinates.m</file>
+      <file>${PROJECT_ROOT}/screens/get_intersection_indices.m</file>
+      <file>${PROJECT_ROOT}/screens/get_intersections_finalScreen.m</file>
+      <file>${PROJECT_ROOT}/screens/get_pixel_coordinates.m</file>
+      <file>${PROJECT_ROOT}/screens/get_transfromed_image.m</file>
+      <file>${PROJECT_ROOT}/screens/make_line_function.m</file>
+      <file>${PROJECT_ROOT}/screens/make_line_functions.m</file>
+      <file>${PROJECT_ROOT}/test_images/CatDog.mat</file>
+      <file>${PROJECT_ROOT}/test_images/cat.mat</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="/home/jernej/Dropbox/MM/HAs/Lens-Simulations" name="MATLAB-Version" optional="false">/home/jernej/Dropbox/MM/HAs/Lens-Simulations/MATLAB-Version</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/home/jernej/MATLAB/R2018a</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>4.13.0-43-generic</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

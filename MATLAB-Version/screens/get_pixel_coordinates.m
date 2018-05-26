@@ -35,5 +35,5 @@ function [pixel_coordinates] = get_pixel_coordinates(screen_lu_coordinates, scal
     end
 
     % Reshape to dimensions matching the original image.
-    pixel_coordinates = reshape(pixel_coordinates, image_dims);
+    pixel_coordinates = reshape(pixel_coordinates, image_dims(1:2));
 end
