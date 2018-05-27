@@ -16,7 +16,7 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 	original_image_dimensions = size(line_equations);
 	line_equations = reshape(line_equations, [1, numel(line_equations)]);
 	transformed_line_equations = line_equations;
-	
+	tic;
 	% Go over all equations of lines rrepresenting the rays.
 	% Use parallel for loop as computations for each ray are independent of other rays.
     for k = 1:length(line_equations)
@@ -82,4 +82,5 @@ function [transformed_line_equations] = apply_lensing_all(line_equations, lens, 
 		% #######################################################################
     end
     transformed_line_equations = reshape(transformed_line_equations, original_image_dimensions);
+	toc;
 end

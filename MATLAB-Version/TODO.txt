@@ -1,3 +1,2 @@
 IMAGES
-* High quality image transformed with torus lens at certain distance
-* High quality image transformed with "Heart" lens at certain distance
+* transformed cat picture for torus, heart and bifolia

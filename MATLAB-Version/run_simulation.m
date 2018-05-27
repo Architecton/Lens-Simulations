@@ -5,7 +5,7 @@
 % required for the assignment.
 %
 % Authors: Kim Ana Badovinac, Katja Logar, Jernej Vivod
-function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceScreens, rand, medium, lensMat, vis, multEnt)
+function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceScreens, rand, imageName, medium, lensMat, vis, multEnt)
 
 	% Add children of folder to path.
     folder = fileparts(which(mfilename)); 
@@ -64,7 +64,13 @@ function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceSc
     light_source_coordinates = [0; 0; 0];
 
 	% If choose random image...
-    if rand
+	if ~strcmp(imageName, '')
+		cd('test_images');
+		testing_image = load(imageName);
+		testing_image = struct2cell(testing_image);
+		testing_image = testing_image{1};
+		
+	elseif rand
         % Load random image from CatDog set.	
         cd('test_images');	
         CatDog = load('CatDog.mat');
@@ -80,7 +86,7 @@ function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceSc
 		cat = load('cat_picture.mat');
         testing_image = cat.cat_picture;
         cd('..');
-    end
+	end
 
     % Get matrix of coordinates of pixels on first screen.
     C = get_pixel_coordinates(screen_lu_coordinates, sv1, sv2, size(testing_image));
