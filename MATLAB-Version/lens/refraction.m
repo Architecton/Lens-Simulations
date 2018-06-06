@@ -19,9 +19,11 @@ function w = refraction(intersection, in_dir_vect, n1, n2, lens_equation, first)
     n = n/norm(n);
 	
 	% Use Snell's law in vector form to compute new directional vector.
-    if first
+	if first
         w = (n1/n2).*(cross(n, cross(-n,in_dir_vect)))-n.*sqrt(1-(((n1/n2).^2) .* dot(cross(n,in_dir_vect), cross(n,in_dir_vect))));
     else
         w = (n1/n2).*(cross(n, cross(n,in_dir_vect)))-n.*sqrt(1-(((n1/n2).^2) .* dot(cross(-n,in_dir_vect), cross(n,in_dir_vect))));
-    end
+	end
+	
+	clear intersection in_dir_vect n1 n2 lens_equation first;
 end

@@ -26,4 +26,5 @@ function [line_functions] = make_line_functions(pixel_coordinates, light_source_
 	% Reshape back to original dimensions
 	line_functions = reshape(line_functions, original_dims);
 	
+	clear pixel_coordinates;
 end

@@ -65,5 +65,5 @@ function [intersections, indices] = get_intersections_finalScreen(line_functions
 	% Delete columns of all zeros.
 	indices(:, ~any(indices, 1)) = [];
 	intersections(:, ~any(intersections, 1)) = [];
-	
+	clear line_functions;
 end

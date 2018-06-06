@@ -68,4 +68,5 @@ function [ray_out, ray_inside, t_in, t_out] = apply_lensing(ray_in, lens)
 	% Construct function of ray as it leaves the lens
 	ray_out = @(t) intersection2 + t*dir_vector_out;
 	
+	clear ray_in intersection1 intersection2 dir_vector_inside dir_vector_out;
 end

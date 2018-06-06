@@ -94,6 +94,8 @@ function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceSc
     % Construct line equations representing rays going through light source and pixle on first screen.
     F = make_line_functions(C, light_source_coordinates);
 
+	clear sv1 sv2 screen_lu_coordinates;
+	
     % LENSING APPLICATION ####################################################################################
 
     % Set refraction indices for medium surrounding the lens and the lens material.
@@ -141,18 +143,22 @@ function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceSc
 
     % lensing application	
     F_trans = apply_lensing_all(F, lens, vis, multEnt);
+	
+	clear F;
 
     % ########################################################################################################
 
     % Get instersection coordinates of rays with second screen.
     % The indices matrix stores the index of the pixel whose ray intersected.
     [intersections, indices] = get_intersections_finalScreen(F_trans, finalScreen_lu_coordinates, svf1, svf2);
-
+	clear F_trans;
+	
     % Compute indices of pixels that were intersected by each ray.
     new_indices = get_intersection_indices(intersections, finalScreen_lu_coordinates, svf1, svf2, size(testing_image));
 
     % Get transformed image.
     transformed_image = get_transfromed_image(testing_image, indices, new_indices);
+	clear indices new_indices;
 
     % Initialize two figures - one for original image and one for transformed image.
     im1 = figure('Name','Original Image','NumberTitle','off');
@@ -164,6 +170,8 @@ function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceSc
     imagesc(testing_image); colormap gray;
     title("Original Image");
 
+	clear testing_image;
+	
     % Display transformed image.
 	% Set figure to im2 (transformed image).
     figure(im2);
@@ -172,7 +180,8 @@ function [] = run_simulation(fh, firstX, firstScaling, secondScaling, distanceSc
     title("Transformed Image");
     saveas(h2, 'res.jpg');
     
-
+	clear transformed_image;
+	
     % additional code for the optional configuration visualization
 	if vis
 		% set figure appropriately
