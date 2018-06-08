@@ -1,0 +1,57 @@
+\documentclass[A4]{article}
+\usepackage{amsmath}
+\usepackage{listingsutf8}
+\lstset{literate={č}{{\v c}}1 {š}{{\v s}}1 {ž}{{\v z}}1} %Paket listings (oz. listingsutf8) direktno ne podpirata šumnikov.
+\lstset{basicstyle=\ttfamily, language=Octave} %Nastavimo, da je privzet jezik za lstlistings octave.
+\usepackage[pdftex]{graphicx}
+\usepackage[slovene]{babel} % slovenske nastavitve (naslovi, deljenje besed ...)
+\usepackage[T1]{fontenc}    % font encoding; T1 podpira slovenščino
+\usepackage[utf8]{inputenc} % input encoding; lahko je tudi [cp1250] ali [latin2]
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+\title{Lens Simulation}
+\author{Jernej Vivod, Kim Ana Badovinac, Katja Logar}
+\maketitle
+\section{Description}
+
+\section{Refraction}
+When light passes through media with different indices of refraction, it refracts according to Snell's law. Snell's law tells us that the ratio of the sines of the angles of incidence and refraction is equivalent to the ratio of the indices of refraction:
+\[
+	\dfrac{\sin(\theta_1)}{\sin(\theta_2)} = \dfrac{n_2}{n_1}
+\]
+In the above equation, $\theta_1$ in the angle of incidence (the angle between the ray of incidence and the normal to the surface), $\theta_2$ in the angle of refraction (the angle between the ray of refraction and the normal to the surface), $n_1$ is the refractive index of the incoming medium and $n_2$ is the refractive index of the outcoming medium. \\ \\
+In our project we notice refraction when the ray enters the len and when it exits the len. \\ \\
+Refraction is implemented in function $refraction.m$. Instead of the scalar form of the law, we use Snell's law in vector form:
+\[
+	\vec{s_2} = \dfrac{n_1}{n_2}(\vec{n}\times(-\vec{n}\times\vec{s_1})) - \vec{n}\sqrt{1-(\dfrac{n_1}{n_2})^2(\vec{n}\times\vec{s_1})(\vec{n}\times		\vec{s_1})}
+\]
+Here $\vec{s_2}$ is the vector we seek, meaning it is the refracted vector, $\vec{s_1}$ is the incident vector and $\vec{n}$ is the normal, that we compute by computing the gradient of the functon of the len at the intersection. \\ \\
+It is important to note, that the above formula assumes, that both $\vec{n}$ and $\vec{s_1}$ are vectors with the norm equal to 1. Therefore, before we compute $\vec{s_2}$, we need to divide $\vec{n}$ and $\vec{s_1}$ by their norm. \\\\
+Also, when computing the refracted ray, it is important to know, whether we are entering the len or exiting it. That is because the first part of the above equation: $\dfrac{n_1}{n_2}(\vec{n}\times(-\vec{n}\times\vec{s_1}))$ contains $-$ in $(-\vec{n}\times\vec{s_1})$, which takes into consideration that we should actually take the negative normal, when entering the len, since the negative normal points in the same direction (towards the center) as the incident ray. Therefore, the $-$ in  $(-\vec{n}\times\vec{s_1})$ is not needed when we are exiting the len.\\ \\
+One more thing that we have to watch out for is total internal reflection. It can happen for rays that are crossing into a less dense medium ($n_2 < n_1$) - in our case that happens when light exits the len. In that case, if the incident angle is big enough, the light won't refract, it will reflect. That happens for angles bigger than the critical angle. \\\\
+\subsubsection{Alternative method for computing the refracted ray}
+We can compute the orthogonal projection of the incident vector to the normal of the surface:
+\[
+	\vec{p} = \dfrac{\vec{s_1} \vec{n}}{\vec{n} \vec{n}}\vec{n}
+\]
+Then we compute the vector $\vec{u}$:
+\[
+	\vec{u} = \vec{s_1} - \vec{p}
+\]
+The refracted ray is then:
+\[
+	\vec{s_2} = \vec{p} + \dfrac{n_1}{n_2}\vec{u}
+\]
+\section{Sources}
+\begin{itemize}
+  \item https://en.wikipedia.org/wiki/Refraction
+  \item https://en.wikipedia.org/wiki/Snell%27s_law
+  \item http://www.starkeffects.com/snells-law-vector.shtml
+\end{itemize}
+\end{document}
