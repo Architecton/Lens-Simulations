@@ -1,5 +1,0 @@
-FUNCTIONALITY
-
-* support for any multiple of 2 intersections  DONE -- !!! TEST !!!
-* Add choice of lens shape
-* fix lom function formatting

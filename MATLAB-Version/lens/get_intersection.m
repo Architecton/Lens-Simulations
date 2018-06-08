@@ -38,4 +38,5 @@ function [intersection, t] = get_intersection(ray_in, lens_equation)
 		intersection = [];
 		return
 	end
+	clear ray_in lens_equation;
 end

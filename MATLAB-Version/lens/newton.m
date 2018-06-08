@@ -22,4 +22,5 @@ function t = newton(g, t0, tol, max_it)
 			break;
 		end
 	end
+	clear g dg;
 end

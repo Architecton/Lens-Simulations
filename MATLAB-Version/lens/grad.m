@@ -29,4 +29,5 @@ function [grad_val] = grad(f, T)
 	% Make vector representing the evaluated gradient.
 	grad_val = [grad_part_1(2), grad_part_2(2), grad_part_3(2)];
   
+	clear f T;
 end
