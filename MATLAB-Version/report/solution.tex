@@ -4,7 +4,7 @@
 \lstset{literate={č}{{\v c}}1 {š}{{\v s}}1 {ž}{{\v z}}1} %Paket listings (oz. listingsutf8) direktno ne podpirata šumnikov.
 \lstset{basicstyle=\ttfamily, language=Octave} %Nastavimo, da je privzet jezik za lstlistings octave.
 \usepackage[pdftex]{graphicx}
-\usepackage[slovene]{babel} % slovenske nastavitve (naslovi, deljenje besed ...)
+\usepackage[english]{babel} % slovenske nastavitve (naslovi, deljenje besed ...)
 \usepackage[T1]{fontenc}    % font encoding; T1 podpira slovenščino
 \usepackage[utf8]{inputenc} % input encoding; lahko je tudi [cp1250] ali [latin2]
 \usepackage{graphicx}
@@ -38,8 +38,7 @@ This matrix of line functions represents a sort of interface between the three m
 \vspace{10mm}
 
 \includegraphics[scale=0.5, inner]{rays1}
-\captionof{figure}{Plotting the result of the evaluation the interpolating function as a linearly interpolated surface using the surf function
-}
+\captionof{figure}{Visualizing the Rays Passing from the Light Source Through each Pixel on the Second Screen}
 
 \vspace{10mm}
 
@@ -79,6 +78,7 @@ Here $\vec{s_2}$ is the vector we seek, meaning it is the refracted vector, $\ve
 It is important to note, that the above formula assumes, that both $\vec{n}$ and $\vec{s_1}$ are vectors with the norm equal to 1. Therefore, before we compute $\vec{s_2}$, we need to divide $\vec{n}$ and $\vec{s_1}$ by their norm. \\\\
 Also, when computing the refracted ray, it is important to know, whether we are entering the len or exiting it. That is because the first part of the above equation: $\dfrac{n_1}{n_2}(\vec{n}\times(-\vec{n}\times\vec{s_1}))$ contains $-$ in $(-\vec{n}\times\vec{s_1})$, which takes into consideration that we should actually take the negative normal, when entering the len, since the negative normal points in the same direction (towards the center) as the incident ray. Therefore, the $-$ in  $(-\vec{n}\times\vec{s_1})$ is not needed when we are exiting the len.\\ \\
 One more thing that we have to watch out for is total internal reflection. It can happen for rays that are crossing into a less dense medium ($n_2 < n_1$) - in our case that happens when light exits the len. In that case, if the incident angle is big enough, the light won't refract, it will reflect. That happens for angles bigger than the critical angle. \\\\
+
 \subsubsection{Alternative method for computing the refracted ray}
 We can compute the orthogonal projection of the incident vector to the normal of the surface:
 \[
@@ -92,10 +92,92 @@ The refracted ray is then:
 \[
 	\vec{s_2} = \vec{p} + \dfrac{n_1}{n_2}\vec{u}
 \]
+
+\vspace{10mm}
+
+\includegraphics[scale=0.3]{rays_in}
+\captionof{figure}{Visualizing the Rays entering a Spherical lens}
+
+\vspace{10mm}
+
+\section{Results}
+
+This section presents some images that were obtained by running the program. The program is configured to be able to produce both images with applied lensing and also plots of the light source, screens and lens configuration that produced these results.\\\\
+An extended collection of the results can be found in the results folder in the the project folder.
+
+
+\vspace{10mm}
+
+\includegraphics[scale=0.3]{cat}
+\captionof{figure}{The Original image of a Cat used for Testing Purposes}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.5]{checkers}
+\captionof{figure}{The Original Image of A Checkers Pattern used for Testing Purposes}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.18, inner]{1}
+\captionof{figure}{Applying an Ellipsoidal lens with an 0.2 Scaling factor in the x Direction}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.18]{2}
+\captionof{figure}{Applying an Ellipsoidal lens with an 0.8 Scaling factor in the x Direction}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.7]{4}
+\captionof{figure}{Visualizing the Screens and The Taubin's Heart lens}
+
+\vspace{10mm}
+
+
+\includegraphics[scale=0.7]{5}
+\captionof{figure}{Top Down View of the Screens and The Taubin's Heart lens}
+
+\vspace{10mm}
+
+
+\includegraphics[scale=0.8]{6}
+\captionof{figure}{The Cat Image transformed through a Taubin's heart scaled by a factor 0.2 in the x direction}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.6]{7}
+\captionof{figure}{Visualization of the light source, screens and lens configuration}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.6]{8}
+\captionof{figure}{Top Down View of the light source, screens and lens configuration}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.6]{9}
+\captionof{figure}{Applying Torical lens to the Checkers pattern}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.3]{10}
+\captionof{figure}{Results of Applying torical lens}
+
+\vspace{10mm}
+
+\includegraphics[scale=0.8]{11}
+\captionof{figure}{Image of a Cat Lensed with a torical lens}
+
+\vspace{10mm}
+
+\newpage
+
 \section{Sources}
 \begin{itemize}
   \item https://en.wikipedia.org/wiki/Refraction
   \item https://en.wikipedia.org/wiki/Snell%27s_law
   \item http://www.starkeffects.com/snells-law-vector.shtml
+  \item Zakrajsek Egon. Matematicno Modeliranje. DMFA \- zaloznistvo, 2004.
+  \item Strang, Gilbert. Introduction to Linear Algebra. Wellesley-Cambridge Press, 2016.
 \end{itemize}
 \end{document}

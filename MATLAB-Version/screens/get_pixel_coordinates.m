@@ -5,8 +5,6 @@
 % screen_lu_coordinates ... column vector containing the coordinates of the left uppoer corner of the first screen
 % scaling_vector_1 ... the 1. first screen spanning vector
 % scaling_vector_2 ... the 2. first screen spanning vector
-%
-% Author: Jernej Vivod
 function [pixel_coordinates] = get_pixel_coordinates(screen_lu_coordinates, scaling_vector_1, scaling_vector_2, image_dims)
 
     % Get image dimensions.
